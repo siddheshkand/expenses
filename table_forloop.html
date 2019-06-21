@@ -1,0 +1,17 @@
+<table>
+                            <thead>
+                            {% for form in form_set %}
+                                {% if forloop.first %}
+                                    {% for field in form %}
+                                        <th>{{ field.label_tag }}</th>
+                                    {% endfor %}
+                                {% endif %}
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    {% for field in form %}
+                                        <td>{{ field }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
