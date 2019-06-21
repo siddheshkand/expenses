@@ -42,6 +42,7 @@
     </style>
 {% endblock style %}
 {% block content %}
+    <div class="mt-5"></div>
     <div class="container">
         <div class="row mt-2">
             <div class="col-sm-6">
@@ -126,9 +127,11 @@
                                                 <tr>
                                                     {% for f in form %}
                                                         {% ifequal f.name 'date' %}
-                                                            <td>{% render_field f class="form-control datepicker" autocomplete="off" placeholder=f.label %}</td>
+                                                            <td>{% render_field f class="form-control datepicker" autocomplete="off" %}
+                                                                {# placeholder=f.label  #}</td>
                                                         {% else %}
-                                                            <td>{% render_field f class="form-control" placeholder=f.label %}</td>
+                                                            <td>{% render_field f class="form-control" %}
+                                                                {# placeholder=f.label  #}</td>
                                                         {% endifequal %}
                                                     {% endfor %}
                                                 </tr>
@@ -219,6 +222,7 @@
             </div>
         </div>
     </div>
+    <div class="mb-5"></div>
 {% endblock content %}
 
 {% block footer %}{% endblock footer %}
