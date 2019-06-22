@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Q
 from django.forms import formset_factory
 from django.shortcuts import redirect, render
@@ -6,6 +7,7 @@ from django.views.generic import CreateView
 from . import forms, models
 
 
+@login_required(login_url='/admin/login/')
 def home(request):
     form = forms.IncomeExpenseCreationForm
     form_set_expenses = formset_factory(forms.IncomeExpenseCreationForm, extra=4)
@@ -46,6 +48,7 @@ def home(request):
     return render(request, 'home/home.html', context)
 
 
+@login_required(login_url='/admin/login/')
 def expenses_create_formset(request):
     if request.method == 'POST':
         IncomeExpensesCreationFormSet = formset_factory(forms.IncomeExpenseCreationForm)
@@ -59,6 +62,7 @@ def expenses_create_formset(request):
         return redirect('/')
 
 
+@login_required(login_url='/admin/login/')
 def income_create_formset(request):
     if request.method == 'POST':
         IncomeExpensesCreationFormSet = formset_factory(forms.IncomeExpenseCreationForm)
