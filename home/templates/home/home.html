@@ -46,7 +46,7 @@
     <div class="container">
         <div class="row mt-2">
             <div class="col-sm-6">
-                <table class="table table-striped tableFixHead">
+                <table class="table table-striped tableFixHead" id="e_i_table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -84,7 +84,11 @@
                     <tfoot>
                     <tr style="color: #002a80;font-weight: bolder">
 
-                        <td colspan="2">Total : {{ total }}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="gotoTop()">Top</button>
+                            <button class="btn btn-primary" onclick="gotoBottom()">Bottom</button>
+                        </td>
+                        <td>Total : {{ total }}</td>
                         <td>Bank Balance</td>
                         <td>{{ bank_balance }}</td>
                         <td>Cash Balance</td>
@@ -243,5 +247,17 @@
                 $(this).val($('#set_all_date').val())
             })
         }
+    </script>
+    <script>
+        function gotoTop() {
+            var objDiv = document.getElementById("e_i_table");
+            objDiv.scrollTop = 0;
+        }
+
+        function gotoBottom() {
+            var objDiv = document.getElementById("e_i_table");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        }
+
     </script>
 {% endblock script %}
