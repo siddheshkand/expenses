@@ -85,8 +85,11 @@
                     <tr style="color: #002a80;font-weight: bolder">
 
                         <td>
-                            <button class="btn btn-primary" onclick="gotoTop()">Top</button>
-                            <button class="btn btn-primary" onclick="gotoBottom()">Bottom</button>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button class="btn btn-primary" onclick="gotoTop()">Top</button>
+                                <button class="btn btn-success" onclick="gotoBottom()">Bottom</button>
+                            </div>
+
                         </td>
                         <td>Total : {{ total }}</td>
                         <td>Bank Balance</td>
