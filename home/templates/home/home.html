@@ -44,6 +44,35 @@
             .tableFixHead {
                 font-size: .8rem;
             }
+
+            .table-tag {
+                display: block;
+                width: 100px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .table-date {
+                display: block;
+                width: 70px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .table-mode {
+
+
+                width: 100px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .table th, .table td {
+                padding: .50rem;
+            }
+
         }
 
     </style>
@@ -68,20 +97,20 @@
                     {% for e in incomeAndExpense %}
                         {% ifequal e.type 'income' %}
                             <tr style="color:green">
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>{{ e.date|date:"d/m/y" }}</td>
+                                <th  >{{ forloop.counter }}</th>
+                                <td class="table-date">{{ e.date|date:"d/m/y" }}</td>
                                 <td>{{ e.amount }}</td>
-                                <td title="{{ e.tags }}">{{ e.tags|slice:':15' }}</td>
-                                <td>{{ e.mode }}</td>
+                                <td title="{{ e.tags }}" class="table-tag">{{ e.tags|slice:':15' }}</td>
+                                <td class="table-mode">{{ e.mode|slice:':1' }}</td>
                                 <td>{{ e.type|slice:':1' }}</td>
                             </tr>
                         {% else %}
                             <tr style="color:red">
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>{{ e.date|date:"d/m/y" }}</td>
+                                <th >{{ forloop.counter }}</th>
+                                <td class="table-date">{{ e.date|date:"d/m/y" }}</td>
                                 <td>{{ e.amount }}</td>
-                                <td title="{{ e.tags }}">{{ e.tags|slice:':15' }}</td>
-                                <td>{{ e.mode }}</td>
+                                <td title="{{ e.tags }}" class="table-tag">{{ e.tags|slice:':15' }}</td>
+                                <td class="table-mode">{{ e.mode|slice:':1' }}</td>
                                 <td>{{ e.type|slice:':1' }}</td>
                             </tr>
                         {% endifequal %}
@@ -95,7 +124,7 @@
                             <button class="btn-primary" style="display: inline;" onclick="gotoTop()">▴</button>
                             <button class="btn-danger" style="display: inline;" onclick="gotoBottom()">▾</button>
                         </td>
-                        <td>Total : {{ total }}</td>
+                        <td>TT: {{ total }}</td>
                         <td>B.B</td>
                         <td>{{ bank_balance }}</td>
                         <td>C.B</td>
@@ -104,6 +133,7 @@
 
                     </tfoot>
                 </table>
+
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="accordion" id="accordionExample">
