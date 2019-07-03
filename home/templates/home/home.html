@@ -45,7 +45,7 @@
     <div class="mt-5"></div>
     <div class="container">
         <div class="row mt-2">
-            <div class="col-sm-8">
+            <div class="col-lg-6 col-sm-12">
                 <table class="table table-striped tableFixHead" id="e_i_table">
                     <thead>
                     <tr>
@@ -85,11 +85,8 @@
                     <tr style="color: #002a80;font-weight: bolder">
 
                         <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button class="btn btn-primary" onclick="gotoTop()">Top</button>
-                                <button class="btn btn-success" onclick="gotoBottom()">Bottom</button>
-                            </div>
-
+                            <button class="btn-primary" style="display: inline;" onclick="gotoTop()">▴</button>
+                            <button class="btn-danger" style="display: inline;" onclick="gotoBottom()">▾</button>
                         </td>
                         <td>Total : {{ total }}</td>
                         <td>Bank Balance</td>
@@ -101,7 +98,7 @@
                     </tfoot>
                 </table>
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-6 col-sm-12">
                 <div class="accordion" id="accordionExample">
                     <div class="card">
                         <div class="card-header" id="headingOne">
