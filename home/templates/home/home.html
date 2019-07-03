@@ -225,6 +225,24 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-2">
+
+            <div class="col-lg-6">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'img/stats.png' %}" style="height: auto;width: 200px">
+                    <div class="card-body">
+                        <h5 class="card-title btn-primary" style="display: inline;padding: 5px">Average Exp.
+                              {{ stats.daily_expenses_mean }} ₹</h5>
+                        <br>
+                        <br>
+                        <h5 class="card-title btn-primary"
+                                                                         style="display: inline;padding: 5px">Median
+                        Exp.
+                        {{ stats.daily_expenses_median}} ₹</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="mb-5"></div>
 {% endblock content %}
