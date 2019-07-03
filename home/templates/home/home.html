@@ -232,15 +232,18 @@
                     <img class="card-img-top" src="{% static 'img/stats.png' %}" style="height: auto;width: 200px">
                     <div class="card-body">
                         <h5 class="card-title btn-primary" style="display: inline;padding: 5px">Average Exp.
-                              {{ stats.daily_expenses_mean }} ₹</h5>
+                            {{ stats.daily_expenses_mean }} ₹</h5>
                         <br>
                         <br>
                         <h5 class="card-title btn-primary"
-                                                                         style="display: inline;padding: 5px">Median
-                        Exp.
-                        {{ stats.daily_expenses_median}} ₹</h5>
+                            style="display: inline;padding: 5px">Median
+                            Exp.
+                            {{ stats.daily_expenses_median }} ₹</h5>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-6">
+                <canvas id="myChart"></canvas>
             </div>
         </div>
     </div>
@@ -277,5 +280,54 @@
             objDiv.scrollTop = objDiv.scrollHeight;
         }
 
+    </script>
+    <script>
+        var speedData = {
+            labels: [
+                {% for a in stats.dates_array%}
+                    "{{ a }}" ,
+                {% endfor %}
+            ],
+            datasets: [{
+                label: "income",
+                data: [
+                    {% for a in stats.daily_income%}
+
+                        {{ a }},
+                    {% endfor %}
+                ],
+                backgroundColor: ['rgba(0, 171,12, 0.7)'],
+            },
+                {
+                    label: "expenses",
+                    data: [
+                        {% for a in stats.daily_expenses%}
+
+                            {{ a }},
+                        {% endfor %}
+                    ],
+                    backgroundColor: ['rgba(0, 171,255, 0.7)'],
+                },
+            ]
+
+        };
+
+        var chartOptions = {
+            legend: {
+                backgroundColor: 'red',
+                display: true,
+                position: 'top',
+                labels: {
+                    boxWidth: 80,
+                    fontColor: 'black'
+                }
+            }
+        };
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: speedData,
+            options: chartOptions
+        });
     </script>
 {% endblock script %}

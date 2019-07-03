@@ -13,17 +13,28 @@ import statistics
 def get_stat():
     stats = {}
     if models.IncomeAndExpense.objects.exists():
+        dates_array = []
         start_date = models.IncomeAndExpense.objects.earliest('date').date
         end_date = models.IncomeAndExpense.objects.latest('date').date
         # Iterate over start end
         day = datetime.timedelta(days=1)
         daily_expenses_array = []
+        daily_income_array = []
         while start_date <= end_date:
-            daily_sum = models.IncomeAndExpense.objects.filter(type='expense').filter(date=start_date).aggregate(
-                Sum('amount'))['amount__sum']
-            if not daily_sum:
-                daily_sum = 0
-            daily_expenses_array.append(daily_sum)
+            daily_sum_expenses = \
+                models.IncomeAndExpense.objects.filter(type='expense').filter(date=start_date).aggregate(
+                    Sum('amount'))['amount__sum']
+
+            daily_sum_income = \
+                models.IncomeAndExpense.objects.filter(type='income').filter(date=start_date).aggregate(
+                    Sum('amount'))['amount__sum']
+            if not daily_sum_expenses:
+                daily_sum_expenses = 0
+            if not daily_sum_income:
+                daily_sum_income = 0
+            daily_expenses_array.append(daily_sum_expenses)
+            daily_income_array.append(daily_sum_income)
+            dates_array.append(start_date)
             start_date = start_date + day
         daily_expenses_median = statistics.median(daily_expenses_array)
         daily_expenses_mean = statistics.mean(daily_expenses_array)
@@ -32,7 +43,9 @@ def get_stat():
         stats.update({'daily_expenses_mean': int(daily_expenses_mean)})
         stats.update({'daily_expenses_median': int(daily_expenses_median)})
         stats.update({'daily_expenses_mode': int(daily_expenses_mode)})
-
+        stats.update({'daily_expenses': daily_expenses_array})
+        stats.update({'daily_income': daily_income_array})
+        stats.update({'dates_array': dates_array})
         return stats
 
 
