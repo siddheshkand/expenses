@@ -39,6 +39,13 @@
         th {
             background: #eee;
         }
+
+        @media only screen and (max-width: 768px) {
+            .tableFixHead {
+                font-size: .8rem;
+            }
+        }
+
     </style>
 {% endblock style %}
 {% block content %}
@@ -50,11 +57,11 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Tags</th>
-                        <th scope="col">Mode</th>
-                        <th scope="col">Type</th>
+                        <th scope="col">D</th>
+                        <th scope="col">A</th>
+                        <th scope="col">T</th>
+                        <th scope="col">M</th>
+                        <th scope="col">T</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -238,6 +245,12 @@
                             style="display: inline;padding: 5px">Median
                             Exp.
                             {{ stats.daily_expenses_median }} ₹</h5>
+                        <br>
+                        <br>
+                        <h5 class="card-title btn-primary"
+                            style="display: inline;padding: 5px">Mode
+                            Exp.
+                            {{ stats.daily_expenses_mode }} ₹</h5>
                     </div>
                 </div>
             </div>
