@@ -69,9 +69,14 @@
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
+
             .table th, .table td {
                 padding: .50rem;
             }
+            .mr-tp-responsive{
+                margin-top: 5rem;
+            }
+
 
         }
 
@@ -80,7 +85,7 @@
 {% block content %}
     <div class="mt-5"></div>
     <div class="container">
-        <div class="row mt-2">
+        <div class="row mt-4">
             <div class="col-lg-6 col-sm-12">
                 <table class="table table-striped tableFixHead" id="e_i_table">
                     <thead>
@@ -97,7 +102,7 @@
                     {% for e in incomeAndExpense %}
                         {% ifequal e.type 'income' %}
                             <tr style="color:green">
-                                <th  >{{ forloop.counter }}</th>
+                                <th>{{ forloop.counter }}</th>
                                 <td class="table-date">{{ e.date|date:"d/m/y" }}</td>
                                 <td>{{ e.amount }}</td>
                                 <td title="{{ e.tags }}" class="table-tag">{{ e.tags|slice:':15' }}</td>
@@ -106,7 +111,7 @@
                             </tr>
                         {% else %}
                             <tr style="color:red">
-                                <th >{{ forloop.counter }}</th>
+                                <th>{{ forloop.counter }}</th>
                                 <td class="table-date">{{ e.date|date:"d/m/y" }}</td>
                                 <td>{{ e.amount }}</td>
                                 <td title="{{ e.tags }}" class="table-tag">{{ e.tags|slice:':15' }}</td>
@@ -262,10 +267,10 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-4 mt-sm-5">
 
-            <div class="col-lg-6">
-                <div class="card" style="width: 18rem;">
+            <div class="col-lg-6 mr-tp-responsive">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title btn-primary" style="display: inline;padding: 5px">Average Exp.
                             {{ stats.daily_expenses_mean }} ₹</h5>
@@ -284,8 +289,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <canvas id="myChart"></canvas>
+            <div class="col-lg-6 mr-tp-responsive">
+                <div class="card">
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
