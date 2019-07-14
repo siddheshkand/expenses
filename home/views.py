@@ -91,7 +91,7 @@ def home(request):
         'total': total,
         'stats': stats
     }
-    return render(request, 'home/home.html', context)
+    return render(request, 'home/new_home.html', context)
 
 
 @login_required(login_url='/admin/login/')
