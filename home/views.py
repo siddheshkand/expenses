@@ -1,5 +1,4 @@
 import datetime
-
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Q
 from django.forms import formset_factory
@@ -91,7 +90,7 @@ def home(request):
         'total': total,
         'stats': stats
     }
-    return render(request, 'home/new_home.html', context)
+    return render(request, 'home/home.html', context)
 
 
 @login_required(login_url='/admin/login/')
@@ -120,3 +119,11 @@ def income_create_formset(request):
                     temp.type = 'income'
                     temp.save()
         return redirect('/')
+
+
+def login_user(request):
+    pass
+
+
+def logout_user(request):
+    pass
