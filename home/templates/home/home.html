@@ -79,11 +79,14 @@
         .max-height {
             height: 400px !important;
         }
+    .navbar-light .navbar-nav .nav-link,.navbar-light .navbar-nav .nav-link:hover{
+        color: rgba(255,255,255,1);
+    }
     </style>
 {% endblock style %}
 {% block header %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#"><b class="text-primary">Daily Expense Tracker</b></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+        <a class="navbar-brand" href="#"><b class="text-white">Daily Expense Tracker</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -124,14 +127,14 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        You have <b>{{ bank_balance }} ₹</b> in your account
+                        You have <b class="text-primary">{{ bank_balance }} ₹</b> in your account
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        Last spent <b>{{ stats.today_expenses }} ₹</b> on <b>{{ stats.today_date }}</b>
+                        Last spent <b class="text-success">{{ stats.today_expenses }} ₹</b> on <b class="text-success">{{ stats.today_date }}</b>
                     </div>
                 </div>
             </div>
@@ -242,7 +245,7 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <button class="btn" type="button" data-toggle="collapse"
+                                <button class="btn text-success" type="button" data-toggle="collapse"
                                         data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Add multiple Expenses
                                 </button>
@@ -304,7 +307,7 @@
                     <div class="card">
                         <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
-                                <button class="btn  collapsed" type="button" data-toggle="collapse"
+                                <button class="btn  collapsed text-success" type="button" data-toggle="collapse"
                                         data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Add multiple Income
                                 </button>
