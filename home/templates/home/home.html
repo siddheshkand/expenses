@@ -121,6 +121,24 @@
 {% block content %}
     <div class="mt-5"></div>
     <div class="mt-5"></div>
+    <div class="container" style="padding: 10px">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        You have <b>{{ bank_balance }} ₹</b> in your account
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        You spent today {{ stats.today_expenses }}₹
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container max-height" style="padding: 15px;">
         <div class="row mt-4x">
             <div class="col-lg-6 col-sm-12">
