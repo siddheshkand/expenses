@@ -45,8 +45,9 @@ def get_stat():
         stats.update({'daily_expenses': daily_expenses_array})
         stats.update({'daily_income': daily_income_array})
         stats.update({'dates_array': dates_array})
-        # get last element and set to today's income
+        # get last element and set to today's income and today's date
         stats.update({'today_expenses': daily_expenses_array[-1]})
+        stats.update({'today_date': dates_array[-1]})
         return stats
 
 
