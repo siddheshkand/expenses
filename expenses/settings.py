@@ -24,7 +24,7 @@ SECRET_KEY = 'zc4(fqj5ute@#fj+4%5*$nz0$0)26r3zclyncnkla+kczayl!h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bachatgat360.pythonanywhere.com',]
 
 # Application definition
 
@@ -51,10 +51,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'expenses.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
