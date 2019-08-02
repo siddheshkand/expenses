@@ -79,9 +79,10 @@
         .max-height {
             height: 400px !important;
         }
-    .navbar-light .navbar-nav .nav-link,.navbar-light .navbar-nav .nav-link:hover{
-        color: rgba(255,255,255,1);
-    }
+
+        .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .nav-link:hover {
+            color: rgba(255, 255, 255, 1);
+        }
     </style>
 {% endblock style %}
 {% block header %}
@@ -134,7 +135,8 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        Last spent <b class="text-success">{{ stats.today_expenses }} ₹</b> on <b class="text-success">{{ stats.today_date }}</b>
+                        Last spent <b class="text-success">{{ stats.today_expenses }} ₹</b> on <b
+                            class="text-success">{{ stats.today_date }}</b>
                     </div>
                 </div>
             </div>
@@ -380,8 +382,6 @@
             format: 'd/m/yy',
             autoclose: true,
         });
-
-
     </script>
     <script>
         function set_all() {
@@ -402,6 +402,7 @@
         }
 
     </script>
+
     <script>
         var speedData = {
             labels: [
@@ -409,6 +410,7 @@
                     "{{ a }}" ,
                 {% endfor %}
             ],
+
             datasets: [{
                 label: "income",
                 data: [
@@ -442,13 +444,59 @@
                     boxWidth: 80,
                     fontColor: 'black'
                 }
-            }
+            },
+
         };
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
             data: speedData,
-            options: chartOptions
+            options: chartOptions,
+
         });
     </script>
+    <script>
+
+        document.getElementById("myChart").onclick = function (evt) {
+            var activePoints = myChart.getElementsAtEvent(evt);
+            var firstPoint = activePoints[0];
+            var label = myChart.data.labels[firstPoint._index];
+            var value = myChart.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+            if (firstPoint !== undefined) {
+                loadIndividualTransactionData(label);
+            }
+        };
+    </script>
+    <script>
+        function loadIndividualTransactionData(label) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var arr = JSON.parse(JSON.parse(this.responseText));
+                    trans_arr = [];
+                    let temp_str = "";
+                    for (var i = 0, len = arr.length; i < len; ++i) {
+                        var obj = arr[i];
+                        temp_str += '';
+                        temp_str += obj.fields.date;
+                        temp_str += "  ";
+                        temp_str += obj.fields.amount;
+                        temp_str += "  ";
+                        temp_str += obj.fields.tags;
+                        temp_str += "  ";
+                        temp_str += obj.fields.mode[0];
+                        temp_str += "  ";
+                        temp_str += obj.fields.type[0];
+                        temp_str += '\n';
+                        temp_str += '\n';
+                    }
+                    alert(temp_str);
+
+                }
+            };
+            xhttp.open("GET", "get/transaction/?date=" + label, true);
+            xhttp.send();
+        }
+    </script>
+
 {% endblock script %}

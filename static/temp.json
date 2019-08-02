@@ -1,0 +1,24 @@
+[
+  {
+    "model": "home.incomeandexpense",
+    "pk": 7,
+    "fields": {
+      "date": "2019-06-01",
+      "amount": 6638,
+      "tags": "Opening Balance",
+      "mode": "None",
+      "type": "income"
+    }
+  },
+  {
+    "model": "home.incomeandexpense",
+    "pk": 8,
+    "fields": {
+      "date": "2019-06-01",
+      "amount": 4000,
+      "tags": "Returned By Tejas",
+      "mode": "upi",
+      "type": "income"
+    }
+  }
+]
