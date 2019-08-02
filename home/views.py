@@ -2,11 +2,15 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Q
 from django.forms import formset_factory
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
+import json
 # from django.views.generic import CreateView
+from django.core import serializers
 
 from . import forms, models
 import statistics
+from dateutil.parser import parse
 
 
 def get_stat():
@@ -122,6 +126,15 @@ def income_create_formset(request):
                     temp.type = 'income'
                     temp.save()
         return redirect('/')
+
+
+# @login_required(login_url='/admin/login/')
+def send_transaction_in_json(request):
+    date_requested = parse(request.GET.get('date'))
+    requested_day_trans = models.IncomeAndExpense.objects.filter(date=date_requested)
+    transactions = serializers.serialize("json", requested_day_trans)
+    print(transactions)
+    return HttpResponse(json.dumps(transactions), content_type="application/json")
 
 
 def login_user(request):
