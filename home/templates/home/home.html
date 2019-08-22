@@ -384,7 +384,12 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        <span id="trans_week_day"></span>
+                        <span id="trans_date"></span>
+                        <span id="trans_month"></span>
+                        <span id="trans_year"></span>
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -427,7 +432,6 @@
         }
 
     </script>
-
     <script>
         var speedData = {
             labels: [
@@ -494,6 +498,8 @@
     </script>
     <script>
         function loadIndividualTransactionData(label) {
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -502,32 +508,39 @@
 
                     $('#modal-body-table').empty();
 
-                    var table = $('<table></table>').addClass('table');
-
+                    let table = $('<table></table>').addClass('table');
+                    let head_row = $('<th></th>').addClass('modal_head');
+                    let date_row = $('<td></td>').addClass('');
+                    let day_row = $('<td></td>').addClass('');
                     for (var i = 0, len = arr.length; i < len; ++i) {
                         var obj = arr[i];
                         var row = $('<tr></tr>').addClass('bar');
-
+                        date_obj = new Date(obj.fields.date);
                         if (obj.fields.type === 'income') {
                             row.css('color', 'green');
                         } else {
                             row.css('color', 'red');
 
                         }
-                        var td1 = $('<td></td>').text(obj.fields.date);
                         var td2 = $('<td></td>').text(obj.fields.amount);
                         var td3 = $('<td></td>').text(obj.fields.tags);
                         var td4 = $('<td></td>').text(obj.fields.mode);
                         var td5 = $('<td></td>').text(obj.fields.type);
-                        row.append(td1);
+
                         row.append(td2);
                         row.append(td3);
                         row.append(td4);
                         row.append(td5);
+
                         table.append(row);
                     }
 
                     $('#modal-body-table').append(table);
+                    $('#trans_week_day').text(days[date_obj.getDay()]);
+                    $('#trans_date').text(date_obj.getDate());
+                    const month = date_obj.toLocaleString('default', {month: 'long'});
+                    $('#trans_month').text(month);
+                    $('#trans_year').text(date_obj.getFullYear());
                     $('#exampleModalCenter').modal('show');
 
 
