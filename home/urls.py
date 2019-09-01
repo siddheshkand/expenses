@@ -1,4 +1,8 @@
+from django.conf.urls.static import static
 from django.urls import path
+# from expenses import settings
+from django.conf import settings
+
 from . import views
 
 app_name = 'home'
@@ -10,3 +14,4 @@ urlpatterns = [
     path('income/create/multiple/', views.income_create_formset, name='income_create_multiple'),
     path('schedule/create/multiple/', views.schedule_create_formset, name='schedule_create_multiple'),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
