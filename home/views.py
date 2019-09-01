@@ -13,6 +13,7 @@ import statistics
 from dateutil.parser import parse
 
 
+# Utility Function
 def get_stat():
     stats = {}
     if models.IncomeAndExpense.objects.exists():
@@ -60,7 +61,12 @@ def home(request):
     form = forms.IncomeExpenseCreationForm
     form_set_expenses = formset_factory(forms.IncomeExpenseCreationForm, extra=4)
     form_set_income = formset_factory(forms.IncomeExpenseCreationForm, extra=4)
+    form_set_schedule = formset_factory(forms.SchedulerForm, extra=4)
     incomeAndExpense = models.IncomeAndExpense.objects.all()
+    today = datetime.date.today()
+    schedule = models.Scheduler.objects.all().filter(date__gte=today)
+
+    print(schedule)
 
     # For Bank
     bank_income_total = models.IncomeAndExpense.objects.filter(type='income').filter(
@@ -95,7 +101,9 @@ def home(request):
         'bank_balance': bank_balance,
         'cash_balance': cash_balance,
         'total': total,
-        'stats': stats
+        'stats': stats,
+        'form_set_schedule': form_set_schedule,
+        'schedule': schedule
     }
     return render(request, 'home/home.html', context)
 
@@ -128,7 +136,21 @@ def income_create_formset(request):
         return redirect('/')
 
 
+@login_required(login_url='/admin/login/')
+def schedule_create_formset(request):
+    if request.method == 'POST':
+        ScheduleCreateFormset = formset_factory(forms.SchedulerForm)
+        form_set = ScheduleCreateFormset(request.POST or None)
+        if form_set.is_valid():
+            for form in form_set:
+                if form.cleaned_data != {}:
+                    form.save(commit=True)
+
+        return redirect('/')
+
+
 # @login_required(login_url='/admin/login/')
+# AJAX
 def send_transaction_in_json(request):
     date_requested = parse(request.GET.get('date'))
     requested_day_trans = models.IncomeAndExpense.objects.filter(date=date_requested)
