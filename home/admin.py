@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 
-class MyAdmin(admin.ModelAdmin):
+class MyAdminIncome(admin.ModelAdmin):
     list_display = [
         'id',
         'date',
@@ -13,4 +13,15 @@ class MyAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(models.IncomeAndExpense, MyAdmin)
+class MyAdminSchedule(admin.ModelAdmin):
+    list_display = [
+        'event_name',
+        'date',
+        'from_time',
+        'to_time',
+        'location',
+    ]
+
+
+admin.site.register(models.IncomeAndExpense, MyAdminIncome)
+admin.site.register(models.Scheduler, MyAdminSchedule)

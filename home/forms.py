@@ -13,3 +13,20 @@ class IncomeExpenseCreationForm(forms.ModelForm):
             'tags',
             'mode',
         )
+
+
+class SchedulerForm(forms.ModelForm):
+    event_name = forms.CharField()
+    location = forms.CharField()
+    from_time = forms.TimeInput()
+    to_time = forms.TimeInput()
+
+    class Meta:
+        model = models.Scheduler
+        fields = (
+            'event_name',
+            'date',
+            'from_time',
+            'to_time',
+            'location',
+        )
