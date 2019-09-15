@@ -30,3 +30,22 @@ class Scheduler(models.Model):
 
     def __str__(self):
         return str(self.date) + ":-" + str(self.event_name) + " " + str(self.location)
+
+
+PeriodicExpensesOption = (
+    ('1', "Monthly"),
+    ('3', "Quarterly"),
+    ('12', "Yearly"),
+)
+
+
+class PeriodicExpense(models.Model):
+    name = models.TextField(max_length=255)
+    amount = models.PositiveIntegerField()
+    type = models.TextField(max_length=255, choices=PeriodicExpensesOption)
+    description = models.TextField()
+
+
+class TodoList(models.Model):
+    item_name = models.TextField()
+    # Todo Complete todo list module

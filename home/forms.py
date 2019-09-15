@@ -30,3 +30,19 @@ class SchedulerForm(forms.ModelForm):
             'to_time',
             'location',
         )
+
+
+class PeriodicExpensesForm(forms.ModelForm):
+    name = forms.CharField()
+    amount = forms.CharField()
+    # type = forms.CharField()
+    description = forms.CharField()
+
+    class Meta:
+        model = models.PeriodicExpense
+        fields = [
+            "name",
+            "amount",
+            "type",
+            "description",
+        ]

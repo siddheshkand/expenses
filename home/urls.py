@@ -13,5 +13,7 @@ urlpatterns = [
     path('expense/create/multiple/', views.expenses_create_formset, name='expense_create_multiple'),
     path('income/create/multiple/', views.income_create_formset, name='income_create_multiple'),
     path('schedule/create/multiple/', views.schedule_create_formset, name='schedule_create_multiple'),
+    path('periodic_expenses/create/multiple/', views.periodic_expenses_create_formset,
+         name='periodic_expenses_create_multiple'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -59,9 +59,10 @@ def get_stat():
 @login_required(login_url='/admin/login/')
 def home(request):
     form = forms.IncomeExpenseCreationForm
-    form_set_expenses = formset_factory(forms.IncomeExpenseCreationForm, extra=4)
-    form_set_income = formset_factory(forms.IncomeExpenseCreationForm, extra=4)
-    form_set_schedule = formset_factory(forms.SchedulerForm, extra=4)
+    form_set_expenses = formset_factory(forms.IncomeExpenseCreationForm, extra=6)
+    form_set_income = formset_factory(forms.IncomeExpenseCreationForm, extra=6)
+    form_set_schedule = formset_factory(forms.SchedulerForm, extra=6)
+    form_set_periodic_expenses = formset_factory(forms.PeriodicExpensesForm, extra=6)
     incomeAndExpense = models.IncomeAndExpense.objects.all()
     today = datetime.date.today()
     schedule = models.Scheduler.objects.all().filter(date__gte=today)
@@ -98,6 +99,7 @@ def home(request):
         'incomeAndExpense': incomeAndExpense,
         'form_set_expenses': form_set_expenses,
         'form_set_income': form_set_income,
+        'form_set_periodic_expenses': form_set_periodic_expenses,
         'bank_balance': bank_balance,
         'cash_balance': cash_balance,
         'total': total,
@@ -149,6 +151,19 @@ def schedule_create_formset(request):
         return redirect('/')
 
 
+@login_required(login_url='/admin/login/')
+def periodic_expenses_create_formset(request):
+    if request.method == 'POST':
+        PeriodicExpensesCreateFormset = formset_factory(forms.PeriodicExpensesForm)
+        form_set = PeriodicExpensesCreateFormset(request.POST or None)
+        if form_set.is_valid():
+            for form in form_set:
+                if form.cleaned_data != {}:
+                    form.save(commit=True)
+
+        return redirect('/')
+
+
 # @login_required(login_url='/admin/login/')
 # AJAX
 def send_transaction_in_json(request):
@@ -159,6 +174,7 @@ def send_transaction_in_json(request):
     return HttpResponse(json.dumps(transactions), content_type="application/json")
 
 
+# Todo Incomplete function
 def login_user(request):
     pass
 
