@@ -316,10 +316,10 @@
                                                 <tr>
                                                     {% for f in form %}
                                                         {% ifequal f.name 'date' %}
-                                                            <td>{% render_field f class="form-control datepicker" autocomplete="off" %}
+                                                            <td>{% render_field f class="form-control datepicker" autocomplete="off" placeholder=f.label   %}
                                                                 {# placeholder=f.label  #}</td>
                                                         {% else %}
-                                                            <td>{% render_field f class="form-control" %}
+                                                            <td>{% render_field f class="form-control" placeholder=f.label   %}
                                                                 {# placeholder=f.label  #}</td>
                                                         {% endifequal %}
                                                     {% endfor %}
