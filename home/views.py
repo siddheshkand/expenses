@@ -66,8 +66,9 @@ def home(request):
     incomeAndExpense = models.IncomeAndExpense.objects.all()
     today = datetime.date.today()
     schedule = models.Scheduler.objects.all().filter(date__gte=today)
-
-    print(schedule)
+    periodic_expense = models.PeriodicExpense.objects.all()
+    total_periodic_cost = models.PeriodicExpense.objects.all().aggregate(Sum('amount')).get('amount__sum') or 0
+    # print(schedule)
 
     # For Bank
     bank_income_total = models.IncomeAndExpense.objects.filter(type='income').filter(
@@ -97,6 +98,7 @@ def home(request):
     context = {
         'form': form,
         'incomeAndExpense': incomeAndExpense,
+        'periodic_expense': periodic_expense,
         'form_set_expenses': form_set_expenses,
         'form_set_income': form_set_income,
         'form_set_periodic_expenses': form_set_periodic_expenses,
@@ -105,7 +107,8 @@ def home(request):
         'total': total,
         'stats': stats,
         'form_set_schedule': form_set_schedule,
-        'schedule': schedule
+        'schedule': schedule,
+        'total_periodic_cost': total_periodic_cost,
     }
     return render(request, 'home/home.html', context)
 
