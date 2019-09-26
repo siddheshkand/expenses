@@ -171,6 +171,7 @@ def periodic_expenses_create_formset(request):
 # AJAX
 def send_transaction_in_json(request):
     date_requested = parse(request.GET.get('date'))
+    print(date_requested)
     requested_day_trans = models.IncomeAndExpense.objects.filter(date=date_requested)
     transactions = serializers.serialize("json", requested_day_trans)
     # print(transactions)

@@ -136,8 +136,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
+
+
                     <div class="card-header">
-                        You have <b class="text-primary">{{ bank_balance }} ₹</b> in your account
+                        <b class="text-primary">
+                            <span style="color: black">You have</span> {{ bank_balance }} bb + {{ cash_balance }} cb =
+                            <b class="text-success">{{ total }} ₹ </b>
+                            <span style="color: black">in your account</span>
+                        </b>
                     </div>
                 </div>
             </div>
@@ -279,7 +285,14 @@
                 </a>
                 <div class="collapse" id="collapseExample3">
                     <div class="card">
-                        <canvas id="myChart"></canvas>
+                        <div class="card-body">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <div class="card-footer">
+                            <input type="text" name="form-0-date" placeholder="Date" autocomplete="off"
+                                   id="graph_date" class="form-control datepicker" style="width: 20%;display: inline">
+                            <button class="btn btn-primary" onclick="get_trans_for_input_date()">Go</button>
+                        </div>
                     </div>
                 </div>
                 <a data-toggle="collapse" data-target="#collapseExample4"
@@ -584,6 +597,16 @@
 {% block script %}
     <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
     <script>
+        function get_trans_for_input_date() {
+            let input_field_date = document.getElementById('graph_date').value;
+
+            let parts = input_field_date.split('/');
+            year = parseInt(parts[2]) + 2000;
+            date_obj = new Date(year, parts[1] - 1, parts[0]);
+            console.log(date_obj.toString());
+
+        }
+
         $('.datepicker').datepicker({
             format: 'd/m/yy',
             autoclose: true,
@@ -668,6 +691,7 @@
             var label = myChart.data.labels[firstPoint._index];
             var value = myChart.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
             if (firstPoint !== undefined) {
+                console.log(label);
                 loadIndividualTransactionData(label);
             }
         };
