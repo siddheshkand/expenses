@@ -8,9 +8,11 @@ import json
 # from django.views.generic import CreateView
 from django.core import serializers
 
+from home.serializers import IncomeAndExpenseSerializer
 from . import forms, models
 import statistics
 from dateutil.parser import parse
+from rest_framework import viewsets
 
 
 # Utility Function
@@ -185,3 +187,8 @@ def login_user(request):
 
 def logout_user(request):
     pass
+
+
+class IncomeAndExpenseViewSet(viewsets.ModelViewSet):
+    serializer_class = IncomeAndExpenseSerializer
+    queryset = models.IncomeAndExpense.objects.all()
