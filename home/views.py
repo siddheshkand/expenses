@@ -13,6 +13,7 @@ from . import forms, models
 import statistics
 from dateutil.parser import parse
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
 
 
 # Utility Function
@@ -192,3 +193,4 @@ def logout_user(request):
 class IncomeAndExpenseViewSet(viewsets.ModelViewSet):
     serializer_class = IncomeAndExpenseSerializer
     queryset = models.IncomeAndExpense.objects.all()
+    authentication_classes = (TokenAuthentication,)
