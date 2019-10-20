@@ -46,7 +46,9 @@ def get_stat():
         daily_expenses_median = statistics.median(daily_expenses_array)
         daily_expenses_mean = statistics.mean(daily_expenses_array)
         daily_expenses_mode = statistics.mode(daily_expenses_array)
-        # print(daily_expenses_array)
+        daily_expenses_array = daily_expenses_array[-30:]
+        daily_income_array = daily_income_array[-30:]
+        dates_array = dates_array[-30:]
         stats.update({'daily_expenses_mean': int(daily_expenses_mean)})
         stats.update({'daily_expenses_median': int(daily_expenses_median)})
         stats.update({'daily_expenses_mode': int(daily_expenses_mode)})
